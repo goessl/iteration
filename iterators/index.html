@@ -529,8 +529,7 @@
 
     <div class="doc doc-contents first">
 
-        <p>operationcounter.iterators module.</p>
-<p>Iterators.</p>
+        <p>Iterators.</p>
 
 
 
@@ -561,9 +560,9 @@
     <div class="doc doc-contents ">
 
         <p>Raise the provided exception on the first yield.</p>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">chain</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">exception_generator</span><span class="p">()),</span> <span class="mi">3</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">chain</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">raiser</span><span class="p">()),</span> <span class="mi">3</span><span class="p">))</span>
 <span class="mi">6</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">chain</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">exception_generator</span><span class="p">()),</span> <span class="mi">4</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">chain</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">raiser</span><span class="p">(</span><span class="ne">IndexError</span><span class="p">)),</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
   <span class="o">...</span>
 <span class="ne">IndexError</span>
@@ -573,7 +572,10 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>iteration\iterators.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
@@ -586,16 +588,13 @@
 <span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">raiser</span><span class="p">(</span><span class="n">ex</span><span class="p">:</span><span class="nb">type</span><span class="p">[</span><span class="ne">Exception</span><span class="p">]</span><span class="o">=</span><span class="ne">StopIteration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Never</span><span class="p">]:</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">raiser</span><span class="p">(</span><span class="n">ex</span><span class="p">:</span><span class="nb">type</span><span class="p">[</span><span class="ne">Exception</span><span class="p">]</span><span class="o">=</span><span class="ne">StopIteration</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Never</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Raise the provided exception on the first yield.</span>
 
 <span class="sd">    ```python</span>
-<span class="sd">    &gt;&gt;&gt; sum(islice(chain([1, 2, 3], exception_generator()), 3))</span>
+<span class="sd">    &gt;&gt;&gt; sum(islice(chain([1, 2, 3], raiser()), 3))</span>
 <span class="sd">    6</span>
-<span class="sd">    &gt;&gt;&gt; sum(islice(chain([1, 2, 3], exception_generator()), 4))</span>
+<span class="sd">    &gt;&gt;&gt; sum(islice(chain([1, 2, 3], raiser(IndexError)), 4))</span>
 <span class="sd">    Traceback (most recent call last):</span>
 <span class="sd">      ...</span>
 <span class="sd">    IndexError</span>
@@ -642,7 +641,10 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>iteration\iterators.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">35</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
 <span class="normal">36</span>
 <span class="normal">37</span>
 <span class="normal">38</span>
@@ -664,10 +666,7 @@
 <span class="normal">54</span>
 <span class="normal">55</span>
 <span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">group_ordinal</span><span class="p">(</span><span class="o">*</span><span class="n">iterables</span><span class="p">:</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span><span class="o">...</span><span class="p">]:</span>
+<span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">group_ordinal</span><span class="p">(</span><span class="o">*</span><span class="n">iterables</span><span class="p">:</span><span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span><span class="o">...</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Group elements of iterables by their ordinal.</span>
 
 <span class="sd">    ```python</span>
