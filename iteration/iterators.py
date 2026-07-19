@@ -1,7 +1,4 @@
-"""operationcounter.iterators module.
-
-Iterators.
-"""
+"""Iterators."""
 
 
 
@@ -18,9 +15,9 @@ def raiser(ex:type[Exception]=StopIteration) -> Generator[Never]:
     """Raise the provided exception on the first yield.
     
     ```python
-    >>> sum(islice(chain([1, 2, 3], exception_generator()), 3))
+    >>> sum(islice(chain([1, 2, 3], raiser()), 3))
     6
-    >>> sum(islice(chain([1, 2, 3], exception_generator()), 4))
+    >>> sum(islice(chain([1, 2, 3], raiser(IndexError)), 4))
     Traceback (most recent call last):
       ...
     IndexError

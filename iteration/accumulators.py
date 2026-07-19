@@ -1,7 +1,4 @@
-"""accumulators module.
-
-Accumulators.
-"""
+"""Accumulators."""
 
 
 

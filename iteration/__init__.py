@@ -1,7 +1,4 @@
-"""iteration package.
-
-Exact iteration tools.
-"""
+"""Exact iteration tools."""
 
 from .iterators import *
 from .accumulators import *
